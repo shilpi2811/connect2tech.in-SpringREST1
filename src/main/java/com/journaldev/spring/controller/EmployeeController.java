@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.c2t.annotation.basic.Employee;
+import com.c2t.annotation.basic.Employee2;
 import com.c2t.annotation.basic.EmployeeVO;
 import com.journaldev.spring.service.EmployeeService;
 import com.sun.media.jfxmedia.logging.Logger;
@@ -79,6 +80,20 @@ public class EmployeeController {
 	{
 		empService.deleteEmployee(empId);
 		return "Deleted successfully";
+		
+	}
+	
+	@RequestMapping(value="/rest/emp/addEmp", method=RequestMethod.GET)
+	public @ResponseBody Employee insertEmployee()
+	{
+		Session session=sf.openSession();
+		session.beginTransaction();
+		Employee emp=new Employee("Shilpi","Agrawal",new Date(1992/9/02),"12234566");
+		Employee2 emp2=new Employee2("Shilpi","Agrawal",new Date(1992/9/02),"12234566");
+		session.save(emp);
+		session.save(emp2);
+		session.getTransaction().commit();
+		return emp;
 		
 	}
 	
